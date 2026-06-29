@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ActivatedRoute } from '@angular/router';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { combineLatest, debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs';
 import { Pizza, PizzaCategory, PizzaCustomization } from '../../core/models/pizza.model';
 import { CartStore } from '../../store/cart.store';
 import { MenuService } from '../../core/services/menu.service';
@@ -33,7 +32,6 @@ export class MenuComponent {
   private readonly menuService = inject(MenuService);
   private readonly cartStore = inject(CartStore);
   private readonly snackBar = inject(MatSnackBar);
-  private readonly route = inject(ActivatedRoute);
 
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly category = signal<PizzaCategory | 'all'>('all');
@@ -49,21 +47,18 @@ export class MenuComponent {
   ];
 
   constructor() {
-    const resolved = this.route.snapshot.data['menu'] as Pizza[] | undefined;
-    if (resolved) {
-      this.pizzas.set(resolved);
-    }
-
-    this.searchControl.valueChanges
-      .pipe(
+    combineLatest([
+      this.searchControl.valueChanges.pipe(
+        startWith(this.searchControl.value),
         debounceTime(300),
-        distinctUntilChanged(),
-        switchMap((search) =>
-          this.menuService.search({
-            search,
-            category: this.category(),
-            vegetarianOnly: this.vegetarianOnly(),
-          })
+        distinctUntilChanged()
+      ),
+      toObservable(this.category),
+      toObservable(this.vegetarianOnly),
+    ])
+      .pipe(
+        switchMap(([search, category, vegetarianOnly]) =>
+          this.menuService.search({ search, category, vegetarianOnly })
         ),
         takeUntilDestroyed()
       )
