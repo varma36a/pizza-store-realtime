@@ -1,4 +1,5 @@
 <section class="hero">
+  <span class="hero-emoji">🍕</span>
   <h1>Real-Time Pizza Store</h1>
   <p>Order fresh pizza and track every step — from oven to your door — live.</p>
   <div class="actions">
@@ -14,8 +15,8 @@
 <section class="features">
   <h2>Angular Interview Topics Covered</h2>
   <div class="grid">
-    @for (topic of topics; track topic.title) {
-      <mat-card>
+    @for (topic of topics; track topic.title; let i = $index) {
+      <mat-card class="topic-card" [style.animation-delay.ms]="i * 60">
         <mat-card-header>
           <mat-card-title>{{ topic.title }}</mat-card-title>
         </mat-card-header>

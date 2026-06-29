@@ -3,3 +3,8 @@
   margin: 0 auto;
   padding: 1.5rem;
 }
+
+.route-container {
+  display: block;
+  min-height: calc(100vh - 120px);
+}

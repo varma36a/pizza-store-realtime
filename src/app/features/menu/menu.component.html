@@ -21,8 +21,10 @@
 </div>
 
 <div class="grid">
-  @for (pizza of pizzas(); track pizza.id) {
-    <app-pizza-card [pizza]="pizza" (quickAdd)="onQuickAdd($event)" />
+  @for (pizza of pizzas(); track pizza.id; let i = $index) {
+    <div class="menu-item" [style.animation-delay.ms]="i * 70">
+      <app-pizza-card [pizza]="pizza" (quickAdd)="onQuickAdd($event)" />
+    </div>
   } @empty {
     <p class="empty">No pizzas match your filters.</p>
   }

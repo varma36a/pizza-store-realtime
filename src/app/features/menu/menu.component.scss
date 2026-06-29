@@ -1,5 +1,10 @@
 .menu-header {
   margin-bottom: 1.5rem;
+  animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  p {
+    color: var(--text-secondary);
+  }
 }
 
 .filters {
@@ -8,6 +13,12 @@
   gap: 1rem;
   align-items: center;
   margin-bottom: 2rem;
+  padding: 1.25rem;
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  animation: fadeInUp 0.5s 0.1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 .filters mat-form-field {
@@ -21,8 +32,14 @@
   gap: 1.5rem;
 }
 
+.menu-item {
+  animation: fadeInUp 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
 .empty {
   grid-column: 1 / -1;
   text-align: center;
-  color: #888;
+  color: var(--text-muted);
+  padding: 3rem;
+  animation: fadeIn 0.4s ease both;
 }

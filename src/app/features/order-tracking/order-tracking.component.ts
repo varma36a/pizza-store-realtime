@@ -18,6 +18,7 @@ import { OrderStatusTrackerComponent } from '../../shared/components/order-statu
   imports: [OrderStatusTrackerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './order-tracking.component.html',
+  styleUrl: './order-tracking.component.scss',
 })
 export class OrderTrackingComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);

@@ -1,21 +1,27 @@
 @use '@angular/material' as mat;
+@use './styles/tokens';
+@use './styles/animations';
 
 @include mat.core();
 
-$pizza-theme: mat.define-theme((
+$pizza-dark-theme: mat.define-theme((
   color: (
-    theme-type: light,
+    theme-type: dark,
     primary: mat.$orange-palette,
     tertiary: mat.$red-palette,
   ),
   typography: (
-    brand-family: 'Roboto, sans-serif',
-    plain-family: 'Roboto, sans-serif',
+    brand-family: 'Outfit, sans-serif',
+    plain-family: 'Outfit, sans-serif',
+  ),
+  density: (
+    scale: 0,
   ),
 ));
 
 html {
-  @include mat.all-component-themes($pizza-theme);
+  color-scheme: dark;
+  @include mat.all-component-themes($pizza-dark-theme);
 }
 
 *,
@@ -24,18 +30,78 @@ html {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background: #fafafa;
-  color: #333;
+  font-family: 'Outfit', Roboto, 'Helvetica Neue', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+}
+
+body {
+  background: linear-gradient(
+    -45deg,
+    var(--bg-deep),
+    #12121a,
+    #0d1520,
+    #1a0f0a
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 18s ease infinite;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(255, 107, 53, 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255, 179, 71, 0.08), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+app-root {
+  position: relative;
+  z-index: 1;
+  display: block;
+  min-height: 100%;
 }
 
 a {
-  color: #e65100;
+  color: var(--accent-soft);
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--accent-secondary);
+  }
 }
 
 h1, h2, h3 {
   margin-top: 0;
+  color: var(--text-primary);
+}
+
+mat-card {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border-subtle);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+
+  &:hover {
+    border-color: var(--border-glow);
+  }
+}
+
+mat-toolbar {
+  backdrop-filter: blur(12px);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.empty-state {
+  color: var(--text-muted);
+  text-align: center;
 }

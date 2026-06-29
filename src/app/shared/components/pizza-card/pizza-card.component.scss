@@ -2,17 +2,41 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s;
-}
+  transition: transform var(--transition-spring), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  overflow: hidden;
+  position: relative;
 
-.pizza-card:hover {
-  transform: translateY(-4px);
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(255, 107, 53, 0.06));
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 16px 48px rgba(255, 107, 53, 0.2);
+    border-color: var(--border-glow);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .emoji {
+      transform: scale(1.1) rotate(-5deg);
+    }
+  }
 }
 
 .emoji {
   font-size: 4rem;
   text-align: center;
   padding: 1rem 0 0;
+  transition: transform var(--transition-spring);
+  filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.3));
 }
 
 .meta {
@@ -22,7 +46,7 @@
   flex-wrap: wrap;
   margin: 0.5rem 0;
   font-size: 0.875rem;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .meta mat-icon {
@@ -30,15 +54,21 @@
   width: 16px;
   height: 16px;
   vertical-align: middle;
+  color: var(--accent-soft);
 }
 
 .price {
   font-size: 1.25rem;
-  font-weight: 600;
-  color: #e65100;
+  font-weight: 700;
+  color: var(--accent-soft);
+  text-shadow: 0 0 20px var(--accent-glow);
 }
 
 mat-card-actions {
   margin-top: auto;
   justify-content: space-between;
+}
+
+mat-card-content p {
+  color: var(--text-secondary);
 }
