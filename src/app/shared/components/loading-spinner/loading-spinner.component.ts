@@ -7,23 +7,8 @@ import { LoadingService } from '../../../core/services/loading.service';
   standalone: true,
   imports: [MatProgressSpinnerModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    @if (loading.isLoading()) {
-      <div class="overlay">
-        <mat-spinner diameter="48"></mat-spinner>
-      </div>
-    }
-  `,
-  styles: `
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.35);
-      display: grid;
-      place-items: center;
-      z-index: 9999;
-    }
-  `,
+  templateUrl: './loading-spinner.component.html',
+  styleUrl: './loading-spinner.component.scss',
 })
 export class LoadingSpinnerComponent {
   readonly loading = inject(LoadingService);

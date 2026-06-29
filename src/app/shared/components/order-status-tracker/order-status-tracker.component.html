@@ -1,0 +1,32 @@
+<div class="tracker">
+  <div class="header">
+    <h3>Order {{ order().id }}</h3>
+    <span class="live-badge">● LIVE</span>
+  </div>
+
+  <mat-progress-bar
+    mode="determinate"
+    [value]="progress()"
+    color="accent"
+  ></mat-progress-bar>
+
+  <p class="status-label">{{ statusLabel() }}</p>
+
+  <div class="steps">
+    @for (step of steps(); track step) {
+      <div class="step" [class.active]="isStepActive(step)" [class.done]="isStepDone(step)">
+        <mat-icon>{{ isStepDone(step) ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+        <span>{{ labels[step] }}</span>
+      </div>
+    }
+  </div>
+
+  <ul class="history">
+    @for (event of order().statusHistory.slice().reverse(); track event.timestamp) {
+      <li>
+        <strong>{{ labels[event.status] }}</strong> — {{ event.message }}
+        <small>({{ event.timestamp | timeAgo }})</small>
+      </li>
+    }
+  </ul>
+</div>

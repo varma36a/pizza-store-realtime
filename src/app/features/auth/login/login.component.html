@@ -1,0 +1,36 @@
+<div class="login-wrapper">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Sign In</mat-card-title>
+      <mat-card-subtitle>Pizza Store Demo Accounts</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading()">
+          Login
+        </button>
+      </form>
+
+      <div class="demo-accounts">
+        <p><strong>Demo accounts</strong> (password: password123)</p>
+        <button mat-stroked-button type="button" (click)="fillDemo('customer@pizza.com')">
+          Customer
+        </button>
+        <button mat-stroked-button type="button" (click)="fillDemo('admin@pizza.com')">
+          Admin
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

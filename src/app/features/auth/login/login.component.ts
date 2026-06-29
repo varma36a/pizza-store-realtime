@@ -20,68 +20,8 @@ import { AuthService } from '../../../core/services/auth.service';
     MatSnackBarModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="login-wrapper">
-      <mat-card class="login-card">
-        <mat-card-header>
-          <mat-card-title>Sign In</mat-card-title>
-          <mat-card-subtitle>Pizza Store Demo Accounts</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="outline">
-              <mat-label>Email</mat-label>
-              <input matInput formControlName="email" type="email" />
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Password</mat-label>
-              <input matInput formControlName="password" type="password" />
-            </mat-form-field>
-
-            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading()">
-              Login
-            </button>
-          </form>
-
-          <div class="demo-accounts">
-            <p><strong>Demo accounts</strong> (password: password123)</p>
-            <button mat-stroked-button type="button" (click)="fillDemo('customer@pizza.com')">
-              Customer
-            </button>
-            <button mat-stroked-button type="button" (click)="fillDemo('admin@pizza.com')">
-              Admin
-            </button>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  `,
-  styles: `
-    .login-wrapper {
-      display: grid;
-      place-items: center;
-      min-height: 60vh;
-    }
-    .login-card {
-      width: 100%;
-      max-width: 420px;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    .demo-accounts {
-      margin-top: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-    }
-  `,
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   private readonly fb = inject(FormBuilder);

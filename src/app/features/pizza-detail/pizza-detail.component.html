@@ -1,0 +1,50 @@
+@if (pizza()) {
+  <div class="detail">
+    <div class="visual">
+      <span class="emoji">{{ pizza()!.imageUrl }}</span>
+      <h1>{{ pizza()!.name }}</h1>
+      <p>{{ pizza()!.description }}</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="addToCart()" class="form">
+      <h2>Customize Your Pizza</h2>
+
+      <label>Size</label>
+      <mat-radio-group formControlName="size">
+        @for (size of sizes; track size) {
+          <mat-radio-button [value]="size">{{ size | titlecase }}</mat-radio-button>
+        }
+      </mat-radio-group>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Quantity</mat-label>
+        <input matInput type="number" formControlName="quantity" min="1" max="10" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Extra Toppings</mat-label>
+        <mat-select formControlName="extraToppings" multiple>
+          @for (topping of extraToppings; track topping) {
+            <mat-option [value]="topping">{{ topping | titlecase }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Special Instructions</mat-label>
+        <textarea matInput formControlName="specialInstructions" rows="2"></textarea>
+      </mat-form-field>
+
+      <p class="price">Total: {{ livePrice() | pizzaCurrency }}</p>
+
+      <div class="actions">
+        <a mat-button routerLink="/menu">Back</a>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          Add to Cart
+        </button>
+      </div>
+    </form>
+  </div>
+} @else {
+  <p>Pizza not found. <a routerLink="/menu">Back to menu</a></p>
+}

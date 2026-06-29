@@ -1,0 +1,27 @@
+<mat-card class="pizza-card" appHighlight>
+  <div class="emoji">{{ pizza().imageUrl }}</div>
+  <mat-card-header>
+    <mat-card-title>{{ pizza().name }}</mat-card-title>
+    <mat-card-subtitle>{{ pizza().category | titlecase }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ pizza().description }}</p>
+    <div class="meta">
+      <span><mat-icon>star</mat-icon> {{ pizza().rating }}</span>
+      <span><mat-icon>schedule</mat-icon> {{ pizza().prepTimeMinutes }} min</span>
+      @if (pizza().isVegetarian) {
+        <mat-chip>Veg</mat-chip>
+      }
+      @if (pizza().isSpicy) {
+        <mat-chip color="warn">Spicy</mat-chip>
+      }
+    </div>
+    <p class="price">{{ pizza().basePrice | pizzaCurrency }}+</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-button [routerLink]="['/menu', pizza().id]">Customize</a>
+    <button mat-raised-button color="primary" (click)="quickAdd.emit(pizza())">
+      Quick Add
+    </button>
+  </mat-card-actions>
+</mat-card>

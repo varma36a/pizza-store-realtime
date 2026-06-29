@@ -1,0 +1,7 @@
+<h1>Live Order Tracking</h1>
+
+@if (order()) {
+  <app-order-status-tracker [order]="order()!" />
+} @else {
+  <p>Order not found.</p>
+}

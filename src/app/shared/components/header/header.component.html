@@ -1,0 +1,36 @@
+<mat-toolbar color="primary" class="header">
+  <a routerLink="/" class="brand">
+    <span class="logo">🍕</span>
+    <span>Pizza Store</span>
+  </a>
+
+  <nav class="nav">
+    <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Home
+    </a>
+    <a mat-button routerLink="/menu" routerLinkActive="active">Menu</a>
+    <a mat-button routerLink="/orders" routerLinkActive="active">Orders</a>
+    @if (auth.isAdmin()) {
+      <a mat-button routerLink="/admin" routerLinkActive="active">Admin</a>
+    }
+  </nav>
+
+  <span class="spacer"></span>
+
+  <a mat-icon-button routerLink="/cart" aria-label="Cart">
+    <mat-icon
+      matBadge="{{ cart.itemCount() }}"
+      matBadgeColor="accent"
+      [matBadgeHidden]="cart.isEmpty()"
+    >
+      shopping_cart
+    </mat-icon>
+  </a>
+
+  @if (auth.isAuthenticated()) {
+    <span class="user">{{ auth.currentUser()?.name }}</span>
+    <button mat-button (click)="auth.logout()">Logout</button>
+  } @else {
+    <a mat-button routerLink="/auth/login">Login</a>
+  }
+</mat-toolbar>

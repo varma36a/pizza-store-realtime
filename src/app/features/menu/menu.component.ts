@@ -26,63 +26,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     PizzaCardComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="menu-header">
-      <h1>Our Menu</h1>
-      <p>{{ pizzas().length }} pizzas available</p>
-    </div>
-
-    <div class="filters">
-      <mat-form-field appearance="outline">
-        <mat-label>Search pizzas</mat-label>
-        <input matInput [formControl]="searchControl" placeholder="Margherita, spicy..." />
-      </mat-form-field>
-
-      <mat-button-toggle-group [value]="category()" (change)="category.set($event.value)">
-        @for (cat of categories; track cat.value) {
-          <mat-button-toggle [value]="cat.value">{{ cat.label }}</mat-button-toggle>
-        }
-      </mat-button-toggle-group>
-
-      <mat-slide-toggle [checked]="vegetarianOnly()" (change)="vegetarianOnly.set($event.checked)">
-        Vegetarian only
-      </mat-slide-toggle>
-    </div>
-
-    <div class="grid">
-      @for (pizza of pizzas(); track pizza.id) {
-        <app-pizza-card [pizza]="pizza" (quickAdd)="onQuickAdd($event)" />
-      } @empty {
-        <p class="empty">No pizzas match your filters.</p>
-      }
-    </div>
-  `,
-  styles: `
-    .menu-header {
-      margin-bottom: 1.5rem;
-    }
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-    .filters mat-form-field {
-      flex: 1;
-      min-width: 200px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    .empty {
-      grid-column: 1 / -1;
-      text-align: center;
-      color: #888;
-    }
-  `,
+  templateUrl: './menu.component.html',
+  styleUrl: './menu.component.scss',
 })
 export class MenuComponent {
   private readonly menuService = inject(MenuService);

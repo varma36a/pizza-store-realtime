@@ -1,0 +1,38 @@
+.empty {
+  text-align: center;
+  padding: 3rem;
+  color: #888;
+}
+
+.empty mat-icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+.cart-item {
+  border-bottom: 1px solid #eee;
+}
+
+.summary {
+  max-width: 400px;
+  margin-left: auto;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #eee;
+  border-radius: 12px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.total {
+  font-weight: 700;
+  font-size: 1.25rem;
+  border-top: 1px solid #eee;
+  padding-top: 0.75rem;
+  margin: 0.75rem 0 1rem;
+}

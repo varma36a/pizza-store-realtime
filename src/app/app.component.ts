@@ -8,19 +8,7 @@ import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loa
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, LoadingSpinnerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <app-header />
-    <main class="container">
-      <router-outlet />
-    </main>
-    <app-loading-spinner />
-  `,
-  styles: `
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
-  `,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {}

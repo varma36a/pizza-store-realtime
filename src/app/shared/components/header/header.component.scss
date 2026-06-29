@@ -1,0 +1,38 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+}
+
+.nav {
+  margin-left: 2rem;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user {
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.active {
+  background: rgba(255, 255, 255, 0.15);
+}

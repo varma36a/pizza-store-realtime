@@ -1,0 +1,28 @@
+<section class="hero">
+  <h1>Real-Time Pizza Store</h1>
+  <p>Order fresh pizza and track every step — from oven to your door — live.</p>
+  <div class="actions">
+    <a mat-raised-button color="primary" routerLink="/menu">Browse Menu</a>
+    @if (!auth.isAuthenticated()) {
+      <a mat-stroked-button routerLink="/auth/login">Sign In</a>
+    } @else {
+      <a mat-stroked-button routerLink="/orders">Track Orders</a>
+    }
+  </div>
+</section>
+
+<section class="features">
+  <h2>Angular Interview Topics Covered</h2>
+  <div class="grid">
+    @for (topic of topics; track topic.title) {
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ topic.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ topic.desc }}</p>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</section>

@@ -17,15 +17,7 @@ import { OrderStatusTrackerComponent } from '../../shared/components/order-statu
   standalone: true,
   imports: [OrderStatusTrackerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <h1>Live Order Tracking</h1>
-
-    @if (order()) {
-      <app-order-status-tracker [order]="order()!" />
-    } @else {
-      <p>Order not found.</p>
-    }
-  `,
+  templateUrl: './order-tracking.component.html',
 })
 export class OrderTrackingComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
