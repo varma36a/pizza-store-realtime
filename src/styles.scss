@@ -1,0 +1,41 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$pizza-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$orange-palette,
+    tertiary: mat.$red-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto, sans-serif',
+    plain-family: 'Roboto, sans-serif',
+  ),
+));
+
+html {
+  @include mat.all-component-themes($pizza-theme);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background: #fafafa;
+  color: #333;
+}
+
+a {
+  color: #e65100;
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+}
